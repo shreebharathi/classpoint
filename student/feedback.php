@@ -9,6 +9,9 @@ if(!isset($_SESSION['std_id']) || empty($_SESSION['std_id']))
 }
 
 $user_id = $_SESSION['std_id'];
+       
+       
+       
        ?>
 
 
@@ -147,9 +150,10 @@ $user_id = $_SESSION['std_id'];
             <td><?php echo $row['fb_id'];?></td>
             <td><?php echo $row['as_title'];?></td>
             <td><?php echo $row['tch_name'];?></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Feedback
-</button></td>
+
+<td> <button class="btn btn-primary " data-toggle="modal" data-id="<?php $id= $row['fb_id'] ?>" data-target="#exampleModal"  <?php echo"id=$row[fb_id]'";?> >
+          Feedback
+       </button></td>
             <td><?php echo $row['timestamp'];?></td>
           </tr>
         <?php
@@ -164,13 +168,19 @@ $user_id = $_SESSION['std_id'];
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" >
+      <?php
+                        $id = $_GET['fb_id'];
+                        $sql =  mysql_query ("SELECT * from feedback where fb_id = '$id' ");
+                        $rows= mysql_fetch_array($query11);
+                        echo $rows['fb_content'];
+                  ?>    
+      
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
